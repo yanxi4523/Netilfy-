@@ -3,296 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS任务实现：回到顶部、粘性导航和图片叠加</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-        }
-        
-        body {
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
-        }
-        .navbar {
-            background-color: #2c3e50;
-            padding: 15px 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            transition: all 0.3s ease;
-        }
-        
-        .navbar.scrolled {
-            padding: 10px 0;
-            background-color: rgba(44, 62, 80, 0.95);
-        }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-        
-        .logo {
-            color: #fff;
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-decoration: none;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 30px;
-        }
-        
-        .nav-links a {
-            color: #ecf0f1;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: #3498db;
-        }
-        
-        /* 主内容区域 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-        
-        h1 {
-            text-align: center;
-            margin: 30px 0;
-            color: #2c3e50;
-            font-size: 2.5rem;
-        }
-        
-        .intro {
-            text-align: center;
-            margin-bottom: 40px;
-            color: #7f8c8d;
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #3498db;
-        }
-        
-        .content {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-        .image-overlay {
-            position: relative;
-            height: 500px;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 30px 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .background-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');
-            background-size: cover;
-            background-position: center;
-            filter: brightness(0.7);
-        }
-        
-        .overlay-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            width: 90%;
-            max-width: 800px;
-            z-index: 2;
-        }
-        
-        .overlay-text h3 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-        }
-        
-        .overlay-text p {
-            font-size: 1.3rem;
-            margin-bottom: 25px;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-        }
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: #2c3e50;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            font-size: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            z-index: 99;
-            transition: all 0.3s ease;
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .back-to-top:hover {
-            background-color: #3498db;
-            transform: translateY(-5px);
-        }
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .overlay-text h3 {
-                font-size: 2rem;
-            }
-            
-            .overlay-text p {
-                font-size: 1.1rem;
-            }
-            
-            .image-overlay {
-                height: 400px;
-            }
-            
-            .back-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 50px;
-                height: 50px;
-            }
-        }
-        .placeholder-content {
-            margin-top: 40px;
-        }
-        
-        .placeholder-content p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: #555;
-        }
-        .highlight {
-            background-color: #f8f9fa;
-            border-left: 4px solid #3498db;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 0 5px 5px 0;
-        }
-        
-        .code {
-            font-family: 'Courier New', monospace;
-            background-color: #f4f4f4;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 0.9em;
-        }
-    </style>
+    <title>我的个人主页 - 仿CSDN</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar" id="navbar">
+
+    <nav class="navbar">
         <div class="nav-container">
-            <ul class="nav-links">
-                <li><a href="#home">首页</a></li>
-                <li><a href="#about">关于</a></li>
-                <li><a href="#services">服务</a></li>
-                <li><a href="#portfolio">作品</a></li>
-                <li><a href="#contact">联系</a></li>
-            </ul>
-        </div>
-    </nav>
-    
-    <div class="container">
-        <div class="image-overlay">
-            <div class="background-image"></div>
-            <div class="overlay-text">
-                <h3>文字</h3>
+            <div class="logo">CSDN <span style="font-size:12px; color:#999;">(Demo)</span></div>
+            <div class="search-box">
+                <input type="text" placeholder="搜索博主文章/技术圈">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="nav-links">
+                <a href="#">博客</a>
+                <a href="#">下载</a>
+                <a href="#">学习</a>
+                <div class="user-action">
+                    <button class="btn-write"><i class="fas fa-pen"></i> 创作中心</button>
+                    <div class="avatar-small">
+                        <img src="https://ui-avatars.com/api/?name=User&background=random" alt="头像">
+                    </div>
+                </div>
             </div>
         </div>
+    </nav>
+
+    <div class="container">
+        
+        <aside class="sidebar">
+            <div class="card profile-card">
+                <div class="profile-header">
+                    <img src="https://ui-avatars.com/api/?name=Coder&background=fc5531&color=fff&size=128" alt="博主头像" class="avatar-large">
+                    <div class="profile-info">
+                        <h3>Coding大师</h3>
+                        <p class="id-name">ID: weixin_123456</p>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="count">1024</span>
+                        <span class="label">原创</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="count">50w+</span>
+                        <span class="label">访问</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="count">999</span>
+                        <span class="label">粉丝</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="count">88</span>
+                        <span class="label">排名</span>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button class="btn-follow">关注</button>
+                    <button class="btn-msg">私信</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">获得勋章</div>
+                <div class="badges">
+                    <i class="fas fa-medal" style="color: gold;"></i>
+                    <i class="fas fa-trophy" style="color: silver;"></i>
+                    <i class="fas fa-star" style="color: orange;"></i>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">分类专栏</div>
+                <ul class="category-list">
+                    <li>
+                        <div class="cat-left"><i class="fab fa-python"></i> Python 教程</div>
+                        <span class="cat-count">12篇</span>
+                    </li>
+                    <li>
+                        <div class="cat-left"><i class="fab fa-js"></i> 前端进阶</div>
+                        <span class="cat-count">25篇</span>
+                    </li>
+                    <li>
+                        <div class="cat-left"><i class="fas fa-database"></i> MySQL</div>
+                        <span class="cat-count">8篇</span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="card filter-box">
+                <div class="tabs">
+                    <span class="tab active" onclick="switchTab(this, 'all')">最近更新</span>
+                    <span class="tab" onclick="switchTab(this, 'hot')">热门文章</span>
+                    <span class="tab" onclick="switchTab(this, 'resource')">资源下载</span>
+                </div>
+                <div class="search-inner">
+                    <input type="checkbox" id="original"> <label for="original">只看原创</label>
+                </div>
+            </div>
+
+            <div class="article-list" id="articleList">
+                
+                <article class="card article-item">
+                    <div class="article-header">
+                        <span class="tag-original">原创</span>
+                        <a href="#" class="article-title">深入理解 JavaScript 闭包原理（附图解）</a>
+                    </div>
+                    <p class="article-desc">
+                        闭包是 JavaScript 中最核心但也最难理解的概念之一。本文将通过内存泄漏的案例，结合执行上下文栈（ECS），带你彻底搞懂闭包...
+                    </p>
+                    <div class="article-meta">
+                        <span><i class="far fa-eye"></i> 2031</span>
+                        <span><i class="far fa-thumbs-up"></i> 56</span>
+                        <span><i class="far fa-comment"></i> 12</span>
+                        <span class="date">2023-10-24</span>
+                    </div>
+                </article>
+
+                <article class="card article-item">
+                    <div class="article-header">
+                        <span class="tag-repost">转载</span>
+                        <a href="#" class="article-title">2024年 Web 前端开发路线图</a>
+                    </div>
+                    <p class="article-desc">
+                        前端技术日新月异，从 Vue3 到 React18，再到 TypeScript 的全面普及，初学者该如何规划学习路线？
+                    </p>
+                    <div class="article-meta">
+                        <span><i class="far fa-eye"></i> 5092</span>
+                        <span><i class="far fa-thumbs-up"></i> 120</span>
+                        <span><i class="far fa-comment"></i> 45</span>
+                        <span class="date">2023-10-20</span>
+                    </div>
+                </article>
+                
+                </div>
+        </main>
     </div>
-    <div class="section placeholder-content">
-            <h2>更多内容（用于演示滚动）</h2>
-            <p>占位内容</p>
-            <p>占位内容</p>
-            <p>占位内容</p>
-            <p>占位内容</p>
-            <p>占位内容</p>
-            <p>占位内容</p>
-            <p>占位内容</p>
-            <p>占位内容</p>
-            <p>占位内容</p>
-            <p>占位内容</p>
-            <p>占位内容</p>
-            <p>占位内容</p>
-            <p>占位内容</p>
-            <p>占位内容</p>
-            <p>占位内容</p>
-            <p>占位内容</p>
-        </div>
-    <a href="#" class="back-to-top" id="backToTop">↑</a>
-    
-    <script>
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.pageYOffset > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-        document.getElementById('backToTop').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if(targetId !== '#') {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
+
+    <script src="script.js"></script>
 </body>
 </html>
