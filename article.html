@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深入理解JavaScript闭包及其应用场景 - CSDN博客</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-left">
+                <a href="index.html" class="logo">
+                    <span class="logo-text">CSDN</span>
+                </a>
+                <nav class="main-nav">
+                    <a href="index.html" class="nav-link"><i class="fas fa-home"></i> 首页</a>
+                    <a href="#" class="nav-link active"><i class="fas fa-blog"></i> 博客</a>
+                    <a href="#" class="nav-link"><i class="fas fa-graduation-cap"></i> 学习</a>
+                    <a href="#" class="nav-link"><i class="fas fa-users"></i> 社区</a>
+                    <a href="#" class="nav-link"><i class="fas fa-chart-line"></i> 动态</a>
+                </nav>
+            </div>
+            <div class="navbar-right">
+                <div class="search-box">
+                    <input type="text" placeholder="搜索博客/帖子/用户">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="user-actions">
+                    <a href="#" class="action-btn"><i class="fas fa-bell"></i></a>
+                    <a href="#" class="action-btn"><i class="fas fa-comment-dots"></i></a>
+                    <a href="index.html" class="user-avatar">
+                        <img src="images/avatar.jpg" alt="用户头像">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 文章内容区域 -->
+    <main class="container article-main">
+        <!-- 左侧文章内容 -->
+        <div class="article-content">
+            <!-- 文章头部 -->
+            <header class="article-header">
+                <h1 class="article-title">深入理解JavaScript闭包及其应用场景</h1>
+                <div class="article-meta">
+                    <div class="author-info">
+                        <img src="images/avatar.jpg" alt="作者头像" class="author-avatar">
+                        <div class="author-details">
+                            <a href="index.html" class="author-name">前端开发者</a>
+                            <div class="article-stats">
+                                <span class="stat-item"><i class="far fa-calendar"></i> 2023-10-15</span>
+                                <span class="stat-item"><i class="far fa-eye"></i> 3,245</span>
+                                <span class="stat-item"><i class="far fa-comment"></i> 42</span>
+                                <span class="stat-item"><i class="far fa-heart"></i> 128</span>
+                                <span class="stat-item"><i class="far fa-star"></i> 56</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-actions">
+                        <button class="article-action-btn"><i class="far fa-thumbs-up"></i> 点赞</button>
+                        <button class="article-action-btn"><i class="far fa-star"></i> 收藏</button>
+                        <button class="article-action-btn"><i class="fas fa-share"></i> 分享</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 文章正文 -->
+            <div class="article-body">
+                <div class="article-toc">
+                    <h3>目录</h3>
+                    <ul>
+                        <li><a href="#section1">一、什么是闭包</a></li>
+                        <li><a href="#section2">二、闭包的原理</a></li>
+                        <li><a href="#section3">三、闭包的应用场景</a></li>
+                        <li><a href="#section4">四、闭包的优缺点</a></li>
+                        <li><a href="#section5">五、常见面试题分析</a></li>
+                    </ul>
+                </div>
+                
+                <h2 id="section1">一、什么是闭包</h2>
+                <p>闭包是JavaScript中一个非常重要且强大的概念。简单来说，闭包是指那些能够访问自由变量的函数。这里的自由变量是指在函数中使用的，但既不是函数参数也不是函数局部变量的变量。</p>
+                
+                <p>从技术角度讲，所有JavaScript函数都是闭包，因为它们都能访问外部作用域。但在实践中，我们通常将那些引用了外部变量的函数称为闭包。</p>
+                
+                <div class="code-block">
+                    <pre><code>// 一个简单的闭包示例
+function outer() {
+    let count = 0;
+    
+    function inner() {
+        count++;
+        console.log(count);
+    }
+    
+    return inner;
+}
+
+const counter = outer();
+counter(); // 输出: 1
+counter(); // 输出: 2
+counter(); // 输出: 3</code></pre>
+                </div>
+                
+                <h2 id="section2">二、闭包的原理</h2>
+                <p>要理解闭包的原理，首先需要了解JavaScript的作用域链和词法作用域。</p>
+                
+                <p>当函数被创建时，它会保存其所在的作用域链。即使函数在其原始作用域外被调用，它仍然可以访问这个作用域链中的变量。这就是闭包能够"记住"并访问其词法作用域的原因。</p>
+                
+                <p>在JavaScript引擎中，每个执行上下文都有一个与之关联的词法环境。当函数被创建时，它会获得对其外部词法环境的引用。即使外部函数已经执行完毕，只要内部函数仍然存在（被引用），外部函数的词法环境就不会被垃圾回收，从而形成了闭包。</p>
+                
+                <h2 id="section3">三、闭包的应用场景</h2>
+                <p>闭包在JavaScript编程中有广泛的应用，以下是一些常见的应用场景：</p>
+                
+                <h3>1. 数据封装和私有变量</h3>
+                <p>在ES6之前，JavaScript没有原生的私有成员支持。闭包可以模拟私有变量：</p>
+                
+                <div class="code-block">
+                    <pre><code>function createCounter() {
+    let count = 0; // 私有变量
+    
+    return {
+        increment: function() {
+            count++;
+            return count;
+        },
+        decrement: function() {
+            count--;
+            return count;
+        },
+        getCount: function() {
+            return count;
+        }
+    };
+}
+
+const counter = createCounter();
+console.log(counter.getCount()); // 0
+console.log(counter.increment()); // 1
+console.log(counter.increment()); // 2
+// 无法直接访问count变量，实现了数据封装</code></pre>
+                </div>
+                
+                <h3>2. 函数柯里化</h3>
+                <p>函数柯里化是一种将多参数函数转换为一系列单参数函数的技术：</p>
+                
+                <div class="code-block">
+                    <pre><code>function curry(fn) {
+    return function curried(...args) {
+        if (args.length >= fn.length) {
+            return fn.apply(this, args);
+        } else {
+            return function(...args2) {
+                return curried.apply(this, args.concat(args2));
+            };
+        }
+    };
+}
+
+function add(a, b, c) {
+    return a + b + c;
+}
+
+const curriedAdd = curry(add);
+console.log(curriedAdd(1)(2)(3)); // 6
+console.log(curriedAdd(1, 2)(3)); // 6</code></pre>
+                </div>
+                
+                <h3>3. 模块模式</h3>
+                <p>闭包是实现模块模式的基础：</p>
+                
+                <div class="code-block">
+                    <pre><code>const myModule = (function() {
+    let privateVar = '私有变量';
+    
+    function privateMethod() {
+        console.log('私有方法');
+    }
+    
+    return {
+        publicMethod: function() {
+            console.log('可以访问: ' + privateVar);
+            privateMethod();
+        },
+        publicVar: '公共变量'
+    };
+})();
+
+myModule.publicMethod(); // 可以访问: 私有变量 \n 私有方法
+console.log(myModule.publicVar); // 公共变量
+// myModule.privateVar 和 myModule.privateMethod 无法访问</code></pre>
+                </div>
+                
+                <h2 id="section4">四、闭包的优缺点</h2>
+                
+                <h3>优点：</h3>
+                <ul>
+                    <li>创建私有变量，实现数据封装</li>
+                    <li>让变量的值始终保持在内存中</li>
+                    <li>实现函数柯里化和偏函数应用</li>
+                    <li>模块化开发的基础</li>
+                </ul>
+                
+                <h3>缺点：</h3>
+                <ul>
+                    <li>内存消耗：闭包会使函数中的变量一直保存在内存中，不当使用可能导致内存泄漏</li>
+                    <li>性能影响：闭包的创建和调用比普通函数稍慢</li>
+                </ul>
+                
+                <h2 id="section5">五、常见面试题分析</h2>
+                
+                <h3>面试题1：循环中的闭包</h3>
+                <p>以下代码的输出结果是什么？</p>
+                
+                <div class="code-block">
+                    <pre><code>for (var i = 1; i <= 5; i++) {
+    setTimeout(function() {
+        console.log(i);
+    }, i * 1000);
+}</code></pre>
+                </div>
+                
+                <p>这段代码会输出6五次，而不是1,2,3,4,5。这是因为setTimeout是异步的，当它执行时，循环已经结束，此时i的值为6。</p>
+                
+                <p>使用闭包可以解决这个问题：</p>
+                
+                <div class="code-block">
+                    <pre><code>for (var i = 1; i <= 5; i++) {
+    (function(j) {
+        setTimeout(function() {
+            console.log(j);
+        }, j * 1000);
+    })(i);
+}</code></pre>
+                </div>
+                
+                <p>或者使用let关键字：</p>
+                
+                <div class="code-block">
+                    <pre><code>for (let i = 1; i <= 5; i++) {
+    setTimeout(function() {
+        console.log(i);
+    }, i * 1000);
+}</code></pre>
+                </div>
+                
+                <div class="article-tags">
+                    <span class="tag-label">标签：</span>
+                    <a href="#" class="tag">JavaScript</a>
+                    <a href="#" class="tag">闭包</a>
+                    <a href="#" class="tag">前端开发</a>
+                    <a href="#" class="tag">面试题</a>
+                </div>
+            </div>
+            
+            <!-- 文章操作区域 -->
+            <div class="article-footer">
+                <div class="article-actions-bottom">
+                    <button class="btn-like"><i class="far fa-thumbs-up"></i> 点赞 (128)</button>
+                    <button class="btn-collect"><i class="far fa-star"></i> 收藏 (56)</button>
+                    <button class="btn-share"><i class="fas fa-share"></i> 分享</button>
+                    <button class="btn-comment"><i class="far fa-comment"></i> 评论 (42)</button>
+                </div>
+            </div>
+            
+            <!-- 评论区 -->
+            <div class="comments-section">
+                <h3 class="comments-title">评论 (42)</h3>
+                
+                <div class="comment-form">
+                    <textarea placeholder="写下你的评论..."></textarea>
+                    <div class="comment-form-actions">
+                        <button class="btn btn-primary">发布评论</button>
+                    </div>
+                </div>
+                
+                <div class="comment-list">
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <img src="images/avatar.jpg" alt="评论者头像" class="comment-avatar">
+                            <div class="comment-author">
+                                <span class="comment-author-name">JavaScript爱好者</span>
+                                <span class="comment-time">2023-10-16 10:23</span>
+                            </div>
+                        </div>
+                        <div class="comment-content">
+                            讲得非常清楚，特别是闭包在循环中的应用，之前一直搞不明白为什么var会有问题，现在完全理解了！
+                        </div>
+                        <div class="comment-actions">
+                            <a href="#" class="comment-action"><i class="far fa-thumbs-up"></i> 12</a>
+                            <a href="#" class="comment-action"><i class="far fa-comment"></i> 回复</a>
+                        </div>
+                    </div>
+                    
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <img src="images/avatar.jpg" alt="评论者头像" class="comment-avatar">
+                            <div class="comment-author">
+                                <span class="comment-author-name">前端新手</span>
+                                <span class="comment-time">2023-10-15 22:15</span>
+                            </div>
+                        </div>
+                        <div class="comment-content">
+                            感谢分享！闭包是JavaScript面试中的高频考点，这篇文章总结得很全面，收藏了！
+                        </div>
+                        <div class="comment-actions">
+                            <a href="#" class="comment-action"><i class="far fa-thumbs-up"></i> 8</a>
+                            <a href="#" class="comment-action"><i class="far fa-comment"></i> 回复</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 右侧侧边栏 -->
+        <aside class="article-sidebar">
+            <!-- 作者信息 -->
+            <div class="sidebar-card">
+                <div class="author-card">
+                    <div class="author-avatar-large">
+                        <img src="images/avatar.jpg" alt="作者头像">
+                    </div>
+                    <div class="author-info">
+                        <h4 class="author-name">前端开发者</h4>
+                        <p class="author-title">前端开发工程师 | React/Vue专家</p>
+                        <div class="author-stats">
+                            <div class="author-stat">
+                                <span class="stat-number">128</span>
+                                <span class="stat-label">原创</span>
+                            </div>
+                            <div class="author-stat">
+                                <span class="stat-number">5,624</span>
+                                <span class="stat-label">粉丝</span>
+                            </div>
+                            <div class="author-stat">
+                                <span class="stat-number">1,287</span>
+                                <span class="stat-label">获赞</span>
+                            </div>
+                        </div>
+                        <div class="author-actions">
+                            <a href="index.html" class="btn btn-primary">查看主页</a>
+                            <button class="btn btn-outline">关注</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 目录导航 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">文章目录</h3>
+                <div class="article-navigation">
+                    <a href="#section1" class="nav-link active">一、什么是闭包</a>
+                    <a href="#section2" class="nav-link">二、闭包的原理</a>
+                    <a href="#section3" class="nav-link">三、闭包的应用场景</a>
+                    <a href="#section4" class="nav-link">四、闭包的优缺点</a>
+                    <a href="#section5" class="nav-link">五、常见面试题分析</a>
+                </div>
+            </div>
+            
+            <!-- 相关文章 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">相关文章</h3>
+                <div class="related-articles">
+                    <a href="#" class="related-article">
+                        <h4>JavaScript作用域与作用域链详解</h4>
+                        <div class="related-meta">
+                            <span>阅读 2,845</span>
+                            <span>·</span>
+                            <span>2023-09-20</span>
+                        </div>
+                    </a>
+                    <a href="#" class="related-article">
+                        <h4>ES6箭头函数与普通函数的区别</h4>
+                        <div class="related-meta">
+                            <span>阅读 3,124</span>
+                            <span>·</span>
+                            <span>2023-09-10</span>
+                        </div>
+                    </a>
+                    <a href="#" class="related-article">
+                        <h4>JavaScript原型与原型链完全解析</h4>
+                        <div class="related-meta">
+                            <span>阅读 4,235</span>
+                            <span>·</span>
+                            <span>2023-08-28</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </main>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">关于我们</a>
+                <a href="#">帮助中心</a>
+                <a href="#">联系我们</a>
+                <a href="#">招贤纳士</a>
+                <a href="#">广告服务</a>
+                <a href="#">友情链接</a>
+            </div>
+            <div class="footer-copyright">
+                <p>Copyright © 1999-2023 CSDN 版权所有 京ICP证190046号</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

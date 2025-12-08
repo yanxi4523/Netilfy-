@@ -3,147 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人主页</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>CSDN个人主页 - 前端开发者</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">CSDN <span style="font-size:12px; color:#999;"></span></div>
-            <div class="search-box">
-                <input type="text" placeholder="搜索博主文章/技术圈">
-                <button><i class="fas fa-search"></i></button>
+    <!-- 顶部导航栏 -->
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-left">
+                <a href="index.html" class="logo">
+                    <span class="logo-text">CSDN</span>
+                </a>
+                <nav class="main-nav">
+                    <a href="#" class="nav-link active"><i class="fas fa-home"></i> 首页</a>
+                    <a href="#" class="nav-link"><i class="fas fa-blog"></i> 博客</a>
+                    <a href="#" class="nav-link"><i class="fas fa-graduation-cap"></i> 学习</a>
+                    <a href="#" class="nav-link"><i class="fas fa-users"></i> 社区</a>
+                    <a href="#" class="nav-link"><i class="fas fa-chart-line"></i> 动态</a>
+                </nav>
             </div>
-            <div class="nav-links">
-                <a href="#">博客</a>
-                <a href="#">下载</a>
-                <a href="#">学习</a>
-                <div class="user-action">
-                    <button class="btn-write"><i class="fas fa-pen"></i> 创作中心</button>
-                    <div class="avatar-small">
-                        <img src="https://ui-avatars.com/api/?name=User&background=random" alt="头像">
-                    </div>
+            <div class="navbar-right">
+                <div class="search-box">
+                    <input type="text" placeholder="搜索博客/帖子/用户">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="user-actions">
+                    <a href="#" class="action-btn"><i class="fas fa-bell"></i></a>
+                    <a href="#" class="action-btn"><i class="fas fa-comment-dots"></i></a>
+                    <a href="#" class="user-avatar">
+                        <img src="images/avatar.jpg" alt="用户头像">
+                    </a>
                 </div>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <div class="container">
-        
+    <!-- 主要内容区域 -->
+    <main class="container main-content">
+        <!-- 左侧内容 -->
+        <div class="content-left">
+            <!-- 用户信息卡片 -->
+            <div class="user-card">
+                <div class="user-banner"></div>
+                <div class="user-info">
+                    <div class="user-avatar-large">
+                        <img src="images/avatar.jpg" alt="用户头像">
+                    </div>
+                    <div class="user-details">
+                        <h1 class="username">前端开发者</h1>
+                        <p class="user-title">前端开发工程师 | React/Vue专家</p>
+                        <div class="user-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">128</span>
+                                <span class="stat-label">原创</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">5,624</span>
+                                <span class="stat-label">粉丝</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">1,287</span>
+                                <span class="stat-label">获赞</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">3,450</span>
+                                <span class="stat-label">评论</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">168</span>
+                                <span class="stat-label">收藏</span>
+                            </div>
+                        </div>
+                        <div class="user-actions">
+                            <button class="btn btn-primary">关注</button>
+                            <button class="btn btn-outline">私信</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 文章列表 -->
+            <div class="articles-section">
+                <div class="section-header">
+                    <h2 class="section-title">最新文章</h2>
+                    <a href="#" class="view-all">查看全部 <i class="fas fa-angle-right"></i></a>
+                </div>
+                
+                <div class="article-list">
+                    <!-- 文章1 -->
+                    <article class="article-card">
+                        <div class="article-content">
+                            <h3 class="article-title">
+                                <a href="article.html">深入理解JavaScript闭包及其应用场景</a>
+                            </h3>
+                            <p class="article-summary">闭包是JavaScript中一个非常重要的概念，理解闭包对于掌握JavaScript语言至关重要。本文将深入探讨闭包的原理、应用场景以及常见面试题...</p>
+                            <div class="article-meta">
+                                <span class="meta-item"><i class="far fa-calendar"></i> 2023-10-15</span>
+                                <span class="meta-item"><i class="far fa-eye"></i> 3,245</span>
+                                <span class="meta-item"><i class="far fa-comment"></i> 42</span>
+                                <span class="meta-item"><i class="far fa-heart"></i> 128</span>
+                            </div>
+                        </div>
+                        <div class="article-thumbnail">
+                            <img src="images/article-cover.jpg" alt="文章封面">
+                        </div>
+                    </article>
+                    
+                    <!-- 文章2 -->
+                    <article class="article-card">
+                        <div class="article-content">
+                            <h3 class="article-title">
+                                <a href="#">Vue 3.0 Composition API完全指南</a>
+                            </h3>
+                            <p class="article-summary">Vue 3.0带来了全新的Composition API，它提供了更好的代码组织和逻辑复用能力。本文将从基础到高级，全面讲解Composition API的使用...</p>
+                            <div class="article-meta">
+                                <span class="meta-item"><i class="far fa-calendar"></i> 2023-10-10</span>
+                                <span class="meta-item"><i class="far fa-eye"></i> 4,128</span>
+                                <span class="meta-item"><i class="far fa-comment"></i> 67</span>
+                                <span class="meta-item"><i class="far fa-heart"></i> 210</span>
+                            </div>
+                        </div>
+                        <div class="article-thumbnail">
+                            <img src="images/article-cover.jpg" alt="文章封面">
+                        </div>
+                    </article>
+                    
+                    <!-- 文章3 -->
+                    <article class="article-card">
+                        <div class="article-content">
+                            <h3 class="article-title">
+                                <a href="#">CSS Grid布局实战：创建响应式网页设计</a>
+                            </h3>
+                            <p class="article-summary">CSS Grid是现代的CSS布局系统，可以轻松创建复杂的响应式布局。本文将通过实际案例展示如何使用CSS Grid构建现代化的网页布局...</p>
+                            <div class="article-meta">
+                                <span class="meta-item"><i class="far fa-calendar"></i> 2023-10-05</span>
+                                <span class="meta-item"><i class="far fa-eye"></i> 2,845</span>
+                                <span class="meta-item"><i class="far fa-comment"></i> 35</span>
+                                <span class="meta-item"><i class="far fa-heart"></i> 96</span>
+                            </div>
+                        </div>
+                        <div class="article-thumbnail">
+                            <img src="images/article-cover.jpg" alt="文章封面">
+                        </div>
+                    </article>
+                    
+                    <!-- 文章4 -->
+                    <article class="article-card">
+                        <div class="article-content">
+                            <h3 class="article-title">
+                                <a href="#">Node.js性能优化实践指南</a>
+                            </h3>
+                            <p class="article-summary">Node.js应用的性能优化是一个复杂但重要的课题。本文将分享Node.js性能监控、内存管理、CPU优化等方面的实践经验...</p>
+                            <div class="article-meta">
+                                <span class="meta-item"><i class="far fa-calendar"></i> 2023-09-28</span>
+                                <span class="meta-item"><i class="far fa-eye"></i> 3,672</span>
+                                <span class="meta-item"><i class="far fa-comment"></i> 54</span>
+                                <span class="meta-item"><i class="far fa-heart"></i> 178</span>
+                            </div>
+                        </div>
+                        <div class="article-thumbnail">
+                            <img src="images/article-cover.jpg" alt="文章封面">
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧侧边栏 -->
         <aside class="sidebar">
-            <div class="card profile-card">
-                <div class="profile-header">
-                    <img src="https://ui-avatars.com/api/?name=Coder&background=fc5531&color=fff&size=128" alt="博主头像" class="avatar-large">
-                    <div class="profile-info">
-                        <h3>Coding大师</h3>
-                        <p class="id-name">ID: weixin_123456</p>
+            <!-- 个人成就 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">个人成就</h3>
+                <div class="achievements">
+                    <div class="achievement-item">
+                        <i class="fas fa-medal achievement-icon gold"></i>
+                        <div class="achievement-info">
+                            <div class="achievement-name">博客专家</div>
+                            <div class="achievement-desc">CSDN认证博客专家</div>
+                        </div>
                     </div>
-                </div>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <span class="count">1024</span>
-                        <span class="label">原创</span>
+                    <div class="achievement-item">
+                        <i class="fas fa-trophy achievement-icon blue"></i>
+                        <div class="achievement-info">
+                            <div class="achievement-name">优质创作者</div>
+                            <div class="achievement-desc">连续3年优质内容创作者</div>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <span class="count">50w+</span>
-                        <span class="label">访问</span>
+                    <div class="achievement-item">
+                        <i class="fas fa-star achievement-icon orange"></i>
+                        <div class="achievement-info">
+                            <div class="achievement-name">年度之星</div>
+                            <div class="achievement-desc">2022年度前端领域之星</div>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <span class="count">999</span>
-                        <span class="label">粉丝</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="count">88</span>
-                        <span class="label">排名</span>
-                    </div>
-                </div>
-                <div class="actions">
-                    <button class="btn-follow">关注</button>
-                    <button class="btn-msg">私信</button>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-title">获得勋章</div>
-                <div class="badges">
-                    <i class="fas fa-medal" style="color: gold;"></i>
-                    <i class="fas fa-trophy" style="color: silver;"></i>
-                    <i class="fas fa-star" style="color: orange;"></i>
+            <!-- 标签云 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">标签云</h3>
+                <div class="tags">
+                    <a href="#" class="tag">JavaScript</a>
+                    <a href="#" class="tag">Vue.js</a>
+                    <a href="#" class="tag">React</a>
+                    <a href="#" class="tag">Node.js</a>
+                    <a href="#" class="tag">CSS3</a>
+                    <a href="#" class="tag">HTML5</a>
+                    <a href="#" class="tag">前端工程化</a>
+                    <a href="#" class="tag">Webpack</a>
+                    <a href="#" class="tag">TypeScript</a>
+                    <a href="#" class="tag">性能优化</a>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-title">分类专栏</div>
-                <ul class="category-list">
-                    <li>
-                        <div class="cat-left"><i class="fab fa-python"></i> Python 教程</div>
-                        <span class="cat-count">12篇</span>
-                    </li>
-                    <li>
-                        <div class="cat-left"><i class="fab fa-js"></i> 前端进阶</div>
-                        <span class="cat-count">25篇</span>
-                    </li>
-                    <li>
-                        <div class="cat-left"><i class="fas fa-database"></i> MySQL</div>
-                        <span class="cat-count">8篇</span>
-                    </li>
-                </ul>
+            <!-- 热门文章 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">热门文章</h3>
+                <div class="popular-articles">
+                    <a href="#" class="popular-article">
+                        <span class="popular-rank">1</span>
+                        <span class="popular-title">Vue响应式原理深入解析</span>
+                    </a>
+                    <a href="#" class="popular-article">
+                        <span class="popular-rank">2</span>
+                        <span class="popular-title">ES6+新特性完全指南</span>
+                    </a>
+                    <a href="#" class="popular-article">
+                        <span class="popular-rank">3</span>
+                        <span class="popular-title">前端面试全攻略</span>
+                    </a>
+                    <a href="#" class="popular-article">
+                        <span class="popular-rank">4</span>
+                        <span class="popular-title">Webpack 5配置详解</span>
+                    </a>
+                    <a href="#" class="popular-article">
+                        <span class="popular-rank">5</span>
+                        <span class="popular-title">CSS布局终极指南</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 联系信息 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">联系与关注</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-weixin"></i>
+                        <span>微信公众号</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-zhihu"></i>
+                        <span>知乎</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>邮箱</span>
+                    </a>
+                </div>
             </div>
         </aside>
+    </main>
 
-        <main class="main-content">
-            <div class="card filter-box">
-                <div class="tabs">
-                    <span class="tab active" onclick="switchTab(this, 'all')">最近更新</span>
-                    <span class="tab" onclick="switchTab(this, 'hot')">热门文章</span>
-                    <span class="tab" onclick="switchTab(this, 'resource')">资源下载</span>
-                </div>
-                <div class="search-inner">
-                    <input type="checkbox" id="original"> <label for="original">只看原创</label>
-                </div>
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">关于我们</a>
+                <a href="#">帮助中心</a>
+                <a href="#">联系我们</a>
+                <a href="#">招贤纳士</a>
+                <a href="#">广告服务</a>
+                <a href="#">友情链接</a>
             </div>
-
-            <div class="article-list" id="articleList">
-                
-                <article class="card article-item">
-                    <div class="article-header">
-                        <span class="tag-original">原创</span>
-                        <a href="#" class="article-title">深入理解 JavaScript 闭包原理（附图解）</a>
-                    </div>
-                    <p class="article-desc">
-                        闭包是 JavaScript 中最核心但也最难理解的概念之一。本文将通过内存泄漏的案例，结合执行上下文栈（ECS），带你彻底搞懂闭包...
-                    </p>
-                    <div class="article-meta">
-                        <span><i class="far fa-eye"></i> 2031</span>
-                        <span><i class="far fa-thumbs-up"></i> 56</span>
-                        <span><i class="far fa-comment"></i> 12</span>
-                        <span class="date">2023-10-24</span>
-                    </div>
-                </article>
-
-                <article class="card article-item">
-                    <div class="article-header">
-                        <span class="tag-repost">转载</span>
-                        <a href="#" class="article-title">2024年 Web 前端开发路线图</a>
-                    </div>
-                    <p class="article-desc">
-                        前端技术日新月异，从 Vue3 到 React18，再到 TypeScript 的全面普及，初学者该如何规划学习路线？
-                    </p>
-                    <div class="article-meta">
-                        <span><i class="far fa-eye"></i> 5092</span>
-                        <span><i class="far fa-thumbs-up"></i> 120</span>
-                        <span><i class="far fa-comment"></i> 45</span>
-                        <span class="date">2023-10-20</span>
-                    </div>
-                </article>
-                
-                </div>
-        </main>
-    </div>
-
-    <script src="script.js"></script>
+            <div class="footer-copyright">
+                <p>Copyright © 1999-2023 CSDN 版权所有 京ICP证190046号</p>
+            </div>
+        </div>
+    </footer>
 </body>
-
 </html>
